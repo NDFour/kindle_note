@@ -20,7 +20,7 @@ from export import views as export_views
 
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('lynnn/', admin.site.urls),
 
     path('', export_views.index, name = 'index'),
     path('export/', export_views.index, name = 'export_views_index'),

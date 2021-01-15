@@ -1,0 +1,2 @@
+*/2 * * * * /usr/bin/python3 /usr/kindle_note_web/cron_process_db/main_cron_process_db.py
+1 3 * * * /usr/bin/python3 /usr/kindle_note_web/cron_process_db/del_downloaded_xls.py

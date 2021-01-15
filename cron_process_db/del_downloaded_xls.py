@@ -4,6 +4,7 @@
 import pymysql
 import os
 import traceback
+import requests
 
 
 '''
@@ -58,16 +59,31 @@ def delete_file(full_path_file):
     try:
         cmd = 'rm "' + full_path_file + '"'
         os.system(cmd)
-        print(cmd)
         print('-> "' + full_path_file + '" 【已删除】')
+        return {'status': 1, 'msg': '"' + full_path_file + '" 【已删除】'}
     except Exception as e:
         traceback.print_exc()
         print('-> "' + full_path_file + '" 【删除失败】')
+        return {'status': -1, 'msg': '"' + full_path_file + '" 【删除失败】'}
+
+
+def wechat_notify(text, desc):
+    # Server 酱 / 微信提醒 URL
+    wechat_url = 'https://sc.ftqq.com/SCU52512T77e075b86690b62f884c8eeec4d6969f5cef37ed7855c.send'
+    # Server 酱 消息题
+    notify_data = {
+        'text': text,
+        'desp': desc,
+    }
+
+    r = requests.get( wechat_url, params = notify_data, timeout = 30 )
+    # print('wechat_notify() Finish')
+
 
 
 
 def main():
-    download_path = '/Users/lynn/Desktop/Personal Projects/Kindle_导出生词本_web/kindle_notes/kindle_note/static/exported_files/'
+    download_path = '/usr/kindle_note_web/kindle_note/static/exported_files/'
 
     downloaded_files = get_record_from_sqlite()
 
@@ -77,12 +93,15 @@ def main():
         for d_file in downloaded_files:
             print('===============')
             print(d_file)
-            delete_file(download_path + d_file['name'])
+            sta = delete_file(download_path + d_file['name'])
+            if sta['status'] != 1:
+                wechat_notify('kindle_note_web', sta['msg']):
             status_code = update_download_status(d_file['id'])
             if status_code == 1:
                 print('更新 is_deleted 成功')
             else:
                 print('更新 is_deleted 失败 !!')
+                wechat_notify('kindle_note_web', '更新 is_deleted 失败'):
             print('\n')
 
     print('down')

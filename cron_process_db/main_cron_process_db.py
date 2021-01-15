@@ -60,8 +60,8 @@ def process_kindle_file(file_list, upload_path, output_file_path):
 
 def main():
     # 全部都用绝对路径
-    upload_path = '/Users/lynn/Desktop/Personal Projects/Kindle_导出生词本_web/kindle_notes/kindle_note/user_uploaded/'
-    download_path = '/Users/lynn/Desktop/Personal Projects/Kindle_导出生词本_web/kindle_notes/kindle_note/static/exported_files/'
+    upload_path = '/usr/kindle_note_web/kindle_note/user_uploaded/'
+    download_path = '/usr/kindle_note_web/kindle_note/static/exported_files/'
 
 
     file_list = get_record_from_sqlite()
