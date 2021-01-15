@@ -1,0 +1,69 @@
+
+<!-- 载入静态文件 -->
+{% load static %}
+
+<div class="container">
+	<div class="row">
+
+		<!-- 左半部分 -->
+		<div class="col-sm-9">
+
+			<div class="jumbotron">
+				<!-- <h4 class="display-5">Kindle 生词本导出</h4> -->
+
+				<p><a href="{% static 'files/example.xls' %}" target="_blank">查看导出文件样例</a></p>
+
+				<hr />
+
+				<h3>使用步骤：</h3>
+
+				<p>1. 在下方上传 <span class="text-danger">vocab.db</span> 文件，并填写必要信息</p>
+
+				<p>2. 文件上传成功后，你将会获得一个 <span class="text-danger">取件码</span>，一定要保存好，下载文件时要用</p>
+
+				<p>3. 等待<span class="text-danger"> 5 分钟</span>左右，在右侧输入取件码<span class="text-danger"> 下载 </span>转换后的文件</p>
+
+				<hr />
+
+				<br />
+				{% include 'export/export_uploda_form.html' %}
+
+			</div>
+
+		</div>
+		<!-- 左半部分 结束 -->
+
+
+		<!-- 右半部分 -->
+		<div class="col-sm-3">
+			<!-- 教程 -->
+			<div>
+				{% include 'export/tutorial.html' %}
+			</div>
+			<!-- 教程 END -->
+
+			<!-- 取回文件 -->
+			<div>
+				{% include 'export/get_file.html' %}
+			</div>
+
+			<!-- 联系我 -->
+			<div>
+				{% include 'export/contact_me.html' %}
+			</div>
+
+			<!-- 留言 -->
+			<!--
+			<div>
+				{% include 'export/leave_msg.html' %}
+			</div>
+		-->
+
+		</div>
+		<!-- 右半部分 结束 -->
+		
+	</div>
+
+</div>
+
+

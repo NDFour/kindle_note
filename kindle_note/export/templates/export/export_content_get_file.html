@@ -1,0 +1,97 @@
+
+<!-- 载入静态文件 -->
+{% load static %}
+
+<div class="container">
+	<div class="row">
+
+		<!-- 左半部分 -->
+		<div class="col-sm-9">
+
+			<div class="jumbotron">
+				<h4 class="display-5">凭取件码 取件</h4>
+
+				{% if status == 1 %}
+
+				<hr />
+
+				<p><b>上传时间：</b> {{ upload_time }}</p>
+
+				{% if export_status == '已导出' %}
+
+				<p><b>状态：</b> <span class="text-success">{{ export_status }}</span></p>
+				
+				<pre>{{ export_msg }}</pre>
+
+				<!-- 判断 导出的文件 是否 已删除 -->
+				{% if is_deleted == '已删除' %}
+				<h4 class="text-danger">你要下载的文件已删除，无法下载</h4>
+				{% else %}
+				<button class="btn btn-primary"><a href="{{ requests.path }}/static/exported_files/{{ export_name }}" class="text-white">下载文件</a></button>
+				{% endif %}
+
+				{% elif export_status == '导出异常' %}
+
+				<p><b>状态：</b> <span class="text-danger">{{ export_status }}</span></p>
+
+				{% else %}
+
+				<p><b>状态：</b> <span class="text-info">{{ export_status }}</span></p>
+
+				{% endif %}
+
+
+
+
+				{% else %}
+				<p class="text-secondary">{{ err_msg }}</p>
+
+				<hr />
+
+				<p class="text-danger">没有找到与您输入的取件码对应的文件，请检查是否存在以下问题：</p>
+
+				<p>1. 取件码 错误，则无法正确下载文件</p>
+
+				<p>2. 文件上传后需在 24 小时内下载，超时自动删除</p>
+
+				{% endif %}
+
+			</div>
+
+		</div>
+		<!-- 左半部分 结束 -->
+
+
+		<!-- 右半部分 -->
+		<div class="col-sm-3">
+			<!-- 教程 -->
+			<div>
+				{% include 'export/tutorial.html' %}
+			</div>
+			<!-- 教程 END -->
+
+			<!-- 取回文件 -->
+			<div>
+				{% include 'export/get_file.html' %}
+			</div>
+
+			<!-- 联系我 -->
+			<div>
+				{% include 'export/contact_me.html' %}
+			</div>
+
+			<!-- 留言 -->
+			<!--
+			<div>
+				{% include 'export/leave_msg.html' %}
+			</div>
+		-->
+
+	</div>
+	<!-- 右半部分 结束 -->
+
+</div>
+
+</div>
+
+

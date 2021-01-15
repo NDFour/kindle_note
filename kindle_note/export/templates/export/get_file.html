@@ -1,0 +1,20 @@
+<div class="card text-white bg-info mb-3" style="width: 18rem;">
+	<div class="card-header">
+		取回文件
+	</div>
+
+	<div class="card-body">
+		<!-- 根据 取件码 下载文件 -->
+		<form action="{% url 'get_file' %}" method="get">
+			<div class="form-group form-check form-check-inline">
+				<input type="text" class="form-control" placeholder="输入取件码" name="file_code" required="required">
+				<button type="submit" class="btn btn-danger">取件</button>
+			</div>
+		</form>
+		<!-- 根据 取件码 下载文件 END -->
+	</div>
+
+</div>
+
+
+
