@@ -84,7 +84,7 @@ def index(request):
                         'record_id': save_status['record_id'],
                         # 'msg': '文件上传成功，请等待 5 分钟左右，即可在首页右侧的【取回文件】处通过【取件码】下载文件。',
                     }
-                else
+                else:
                     context = {
                         'status': -2,
                         'title': 'Sorry, 写入记录到数据库时失败',

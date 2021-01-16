@@ -7,7 +7,7 @@ import extract_vocab
 
 def get_record_from_sqlite():
     file_list = []
-    conn = pymysql.connect(host = 'localhost', user = 'root', password = 'cqmygpython2', database = 'kindle_note', charset = 'utf8')
+    conn = pymysql.connect(host = 'localhost', user = 'root', password = 'xqksj', database = 'kindle_note', charset = 'utf8')
     try:
         cursor = conn.cursor()
         # 筛选 未经历过 导出的记录 （除去 已导出 和 导出异常 的)
@@ -26,7 +26,7 @@ def get_record_from_sqlite():
 
 # 导出生词本完成后 修改 数据库记录信息
 def update_export_record(file, record_id, record_info):
-    conn = pymysql.connect(host = 'localhost', user = 'root', password = 'cqmygpython2', database = 'kindle_note', charset = 'utf8')
+    conn = pymysql.connect(host = 'localhost', user = 'root', password = 'xqksj', database = 'kindle_note', charset = 'utf8')
     try:
         cursor = conn.cursor()
 

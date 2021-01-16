@@ -12,7 +12,7 @@ import requests
 '''
 def get_record_from_sqlite():
     file_list = []
-    conn = pymysql.connect(host = 'localhost', user = 'root', password = 'cqmygpython2', database = 'kindle_note', charset = 'utf8')
+    conn = pymysql.connect(host = 'localhost', user = 'root', password = 'xqksj', database = 'kindle_note', charset = 'utf8')
     try:
         cursor = conn.cursor()
         # 筛选 未经历过 导出的记录 （除去 已导出 和 导出异常 的)
@@ -33,7 +33,7 @@ def get_record_from_sqlite():
 并更新其记录为 ‘已删除’
 '''
 def update_download_status(r_id):
-    conn = pymysql.connect(host = 'localhost', user = 'root', password = 'cqmygpython2', database = 'kindle_note', charset = 'utf8')
+    conn = pymysql.connect(host = 'localhost', user = 'root', password = 'xqksj', database = 'kindle_note', charset = 'utf8')
     status_code = 0
     try:
         cursor = conn.cursor()

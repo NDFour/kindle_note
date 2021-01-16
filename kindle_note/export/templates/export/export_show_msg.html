@@ -14,6 +14,9 @@
 			<div class="jumbotron">
 				{% if status == 1 %}
 				<h4 class="display-5 text-success">{{ title }}</h4>
+				<hr />
+				<h5 class="display-5 text-danger">取件码：{{ record_id }}</h5>
+				<p class="text-secondary">一定要牢记取件码哦，等会下载文件时需要～</p>
 				<p>文件上传成功，请等待 5 分钟左右，即可在首页右侧的<a href="{% url 'index' %}"> 取回文件 </a>处通过<span class="text-danger"> 取件码 </span>下载文件。</p>
 				{% else %}
 				<h4 class="display-5 text-danger">{{ title }} 状态码：{{ status }}</h4>
