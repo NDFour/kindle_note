@@ -27,7 +27,11 @@ def save_file(file, file_name, message, is_export_anki):
     # export_user_db.delay( folder_name + f_name , mail_addr, message)
 
     # 写入记录 到 数据库
-    err_msg = ''
+    rel = {
+        'status': 0,
+        'record_id': -1,
+        'err_msg': '',
+    }
     try:
         # print('写入记录到数据库。。。')
         u_recode = Upload_Record()
@@ -37,12 +41,17 @@ def save_file(file, file_name, message, is_export_anki):
         u_recode.upload_time = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime() )
         u_recode.save()
         # print('写入记录成功')
+
+        rel['status'] = 1
+        rel['record_id'] = u_recode.id
     except Exception as e:
         # print(e)
         traceback.print_exc()
-        err_msg = str(e)
 
-    return err_msg
+        rel['status'] = -1
+        rel['err_msg'] = str(e)
+
+    return rel
 
 
 
@@ -68,23 +77,25 @@ def index(request):
                     is_export_anki,
                 )
 
-                if save_status:
-                    context = {
-                        'status': -2,
-                        'title': 'Sorry, 写入记录到数据库时失败',
-                        'err_msg': save_status
-                    }
-                else:
+                if save_status['status'] == 1:
                     context = {
                         'status': 1,
                         'title': '恭喜，文件上传成功！',
+                        'record_id': save_status['record_id'],
                         # 'msg': '文件上传成功，请等待 5 分钟左右，即可在首页右侧的【取回文件】处通过【取件码】下载文件。',
                     }
+                else
+                    context = {
+                        'status': -2,
+                        'title': 'Sorry, 写入记录到数据库时失败',
+                        'err_msg': save_status['err_msg']
+                    }
+
                 return render(request, 'export/export_show_msg.html', context)
             else:
                 context = {
                     'status': 0,
-                    'title': 'Sorry，文件上传失败了',
+                    'title': 'Sorry，文件上传失败了 (表单不合法)',
                     # 'msg': '文件上传错误，请重新尝试或联系管理员。管理员微信：ndfour',
                 }
                 return render(request, 'export/export_show_msg.html', context)
