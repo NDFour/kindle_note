@@ -38,7 +38,6 @@ def save_file(file, file_name, message, is_export_anki):
         u_recode.file_name = f_name
         u_recode.message = message
         u_recode.is_export_anki = is_export_anki
-        u_recode.upload_time = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime() )
         u_recode.save()
         # print('写入记录成功')
 
