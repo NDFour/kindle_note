@@ -119,7 +119,41 @@ def index(request):
         return render(request, 'export/export_index.html', context)
 
 
-# 根据 取件码 下载文件
+# auto_redirect after upload db file.
+#
+# 代码 直接 复制 def get_file(request) 稍加修改即可
+def get_file_auto(request, file_code):
+    context = ''
+    try:
+        # record = get_object_or_404(Upload_Record, id = file_code)
+        record = Upload_Record.objects.get( id = int(file_code) )
+        # update download_status
+        record.download_status = '已下载'
+        record.save()
+
+        context = {
+            'status': 1,
+            'export_name': record.export_name,
+            'export_status': record.export_status,
+            'export_msg': record.export_msg,
+            'upload_time': record.upload_time,
+            'is_deleted': record.is_deleted,
+            # 'export_time': record.export_time,
+        }
+
+    except Exception as e:
+        # print(e)
+        context = {
+            'status': -1,
+            'err_msg': str(e),
+        }
+
+    return render(request, 'export/export_index_get_file.html', context)
+
+
+
+
+# 根据 首页右侧 取件码 下载文件
 def get_file(request):
     file_code = request.GET['file_code'].strip()
 

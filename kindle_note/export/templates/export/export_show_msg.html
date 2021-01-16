@@ -15,46 +15,51 @@
 				{% if status == 1 %}
 				<h4 class="display-5 text-success">{{ title }}</h4>
 				<hr />
-				<h5 class="display-5 text-danger">取件码：{{ record_id }}</h5>
+				<!--<h5 class="display-5 text-danger">取件码：{{ record_id }}</h5>
 				<p class="text-secondary">一定要牢记取件码哦，等会下载文件时需要～</p>
-				<p>文件上传成功，请等待 5 分钟左右，即可在首页右侧的<a href="{% url 'index' %}"> 取回文件 </a>处通过<span class="text-danger"> 取件码 </span>下载文件。</p>
-				{% else %}
-				<h4 class="display-5 text-danger">{{ title }} 状态码：{{ status }}</h4>
-				<p>err_msg: {{ err_msg }}</p>
-				<br />
-				<p>请仔细检查上传的文件是否符合以下条件：</p>
-				<p>1. 文件大小不超过 10 MB</p>
-				<p>2. 文件格式（后缀名）为：db、sqlite、sqlite3 其中之一</p>
-				<br />
-				<p>如果问题还是未能解决，可添加管理员微信</p>
-				{% endif %}
+				<p>文件上传成功，请等待 3-5 分钟，即可在首页右侧的<a href="{% url 'index' %}"> 取回文件 </a>处通过<span class="text-danger"> 取件码 </span>下载文件。</p>
+			-->
+
+			<p>3 秒钟后自动跳转至文件下载页面...</p>
+
+			<script type="text/javascript">
+				　　setTimeout("window.location=('{% url "get_file_auto" record_id %}')",3000);
+			</script>
 
 
-			</div>
+			{% else %}
+			<h4 class="display-5 text-danger">{{ title }} 状态码：{{ status }}</h4>
+			<p>err_msg: {{ err_msg }}</p>
+			<br />
+			<p>请仔细检查上传的文件是否符合以下条件：</p>
+			<p>1. 文件大小不超过 10 MB</p>
+			<p>2. 文件格式（后缀名）为：db、sqlite、sqlite3 其中之一</p>
+			<br />
+			<p>如果问题还是未能解决，可添加管理员微信</p>
+			{% endif %}
+
 
 		</div>
-		<!-- 左半部分 结束 -->
+
+	</div>
+	<!-- 左半部分 结束 -->
 
 
-		<!-- 右半部分 -->
-		<div class="col-3">
-			<!-- 教程 -->
-			<div>
-				{% include 'export/tutorial.html' %}
-			</div>
-			<!-- 教程 END -->
+	<!-- 右半部分 -->
+	<div class="col-3">
+		<!-- 教程 -->
+		<div>
+			{% include 'export/tutorial.html' %}
+		</div>
+		<!-- 教程 END -->
 
-			<!-- 取回文件 -->
-			<div>
-				{% include 'export/get_file.html' %}
-			</div>
 
-			<!-- 联系我 -->
-			<div>
-				{% include 'export/contact_me.html' %}
-			</div>
+		<!-- 联系我 -->
+		<div>
+			{% include 'export/contact_me.html' %}
+		</div>
 
-			<!-- 留言 -->
+		<!-- 留言 -->
 			<!--
 			<div>
 				{% include 'export/leave_msg.html' %}

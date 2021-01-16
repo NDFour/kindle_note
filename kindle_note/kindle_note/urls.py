@@ -25,5 +25,8 @@ urlpatterns = [
     path('', export_views.index, name = 'index'),
     path('export/', export_views.index, name = 'export_views_index'),
     # path('export/upload_msg/', export_views.upload_msg, name = 'export_views_upload_msg'),
+    # for the form
     path('get_file/', export_views.get_file, name = 'get_file'),
+    # for the auto_redirect
+    path('get_file/<int:file_code>', export_views.get_file_auto, name = 'get_file_auto'),
 ]

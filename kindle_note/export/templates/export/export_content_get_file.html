@@ -9,7 +9,7 @@
 		<div class="col-sm-9">
 
 			<div class="jumbotron">
-				<h4 class="display-5">凭取件码 取件</h4>
+				<h4 class="display-5">下载导出文件</h4>
 
 				{% if status == 1 %}
 
@@ -36,7 +36,16 @@
 
 				{% else %}
 
+				<p class="text-success">单词数据导出中...</p>
+
+				<p class="text-success">请在 3-5 分钟后刷新页面查看导出结果</p>
+
 				<p><b>状态：</b> <span class="text-info">{{ export_status }}</span></p>
+
+				<script language="JavaScript">
+					// 页面定时刷新
+					setTimeout(function(){location.reload()},30000); //指定30秒刷新一次
+				</script>
 
 				{% endif %}
 
