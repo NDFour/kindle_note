@@ -2,7 +2,7 @@
 <form action="{% url 'export_views_index' %}" method="post" enctype="multipart/form-data">
 	{% csrf_token %}
 
-	<label class="text-success">请选择生词本文件并上传：</label>
+	<label class="text-success">请上传 vocab.db 文件：</label>
 	<br />
 
 	{{ form }}
