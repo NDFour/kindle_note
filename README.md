@@ -12,6 +12,8 @@
 
 - cron_process_db/del_downloaded_xls.py  [def main]
 
+- cron_process_db/extract_vocab.py  [def main db_path]
+
 - kindle_note/export/views.py  [def get_file]
 
 
