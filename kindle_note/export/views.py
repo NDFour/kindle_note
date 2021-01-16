@@ -128,6 +128,9 @@ def get_file(request):
     try:
         # record = get_object_or_404(Upload_Record, id = file_code)
         record = Upload_Record.objects.get( id = int(file_code) )
+        # update download_status
+        record.download_status = '已下载'
+        record.save()
 
         context = {
             'status': 1,

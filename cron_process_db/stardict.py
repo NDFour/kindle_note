@@ -25,6 +25,7 @@ except:
 
 MySQLdb = None
 
+import traceback
 
 #----------------------------------------------------------------------
 # python3 compatible
@@ -53,6 +54,8 @@ class StarDict (object):
             os.path.abspath(filename)
         self.__conn = None
         self.__verbose = verbose
+        print('--------------')
+        print(self.__dbname)
         self.__open()
 
     # 初始化并创建必要的表格和索引
@@ -81,24 +84,28 @@ class StarDict (object):
         CREATE INDEX IF NOT EXISTS "sd_1" ON stardict (word collate nocase);
         '''
 
-        self.__conn = sqlite3.connect(self.__dbname, isolation_level = "IMMEDIATE")
-        self.__conn.isolation_level = "IMMEDIATE"
+        try:
+            self.__conn = sqlite3.connect(self.__dbname, isolation_level = "IMMEDIATE")
+            self.__conn.isolation_level = "IMMEDIATE"
 
-        sql = '\n'.join([ n.strip('\t') for n in sql.split('\n') ])
-        sql = sql.strip('\n')
+            sql = '\n'.join([ n.strip('\t') for n in sql.split('\n') ])
+            sql = sql.strip('\n')
 
-        self.__conn.executescript(sql)
-        self.__conn.commit()
+            self.__conn.executescript(sql)
+            self.__conn.commit()
 
-        fields = ( 'id', 'word', 'sw', 'phonetic', 'definition', 
-            'translation', 'pos', 'collins', 'oxford', 'tag', 'bnc', 'frq', 
-            'exchange', 'detail', 'audio' )
-        self.__fields = tuple([(fields[i], i) for i in range(len(fields))])
-        self.__names = { }
-        for k, v in self.__fields:
-            self.__names[k] = v
-        self.__enable = self.__fields[3:]
-        return True
+            fields = ( 'id', 'word', 'sw', 'phonetic', 'definition', 
+                'translation', 'pos', 'collins', 'oxford', 'tag', 'bnc', 'frq', 
+                'exchange', 'detail', 'audio' )
+            self.__fields = tuple([(fields[i], i) for i in range(len(fields))])
+            self.__names = { }
+            for k, v in self.__fields:
+                self.__names[k] = v
+            self.__enable = self.__fields[3:]
+            return True
+        except Exception as e:
+            traceback.print_exc()
+            return False
 
     # 数据库记录转化为字典
     def __record2obj (self, record):

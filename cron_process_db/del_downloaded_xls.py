@@ -95,13 +95,13 @@ def main():
             print(d_file)
             sta = delete_file(download_path + d_file['name'])
             if sta['status'] != 1:
-                wechat_notify('kindle_note_web', sta['msg']):
+                wechat_notify('kindle_note_web', sta['msg'])
             status_code = update_download_status(d_file['id'])
             if status_code == 1:
                 print('更新 is_deleted 成功')
             else:
                 print('更新 is_deleted 失败 !!')
-                wechat_notify('kindle_note_web', '更新 is_deleted 失败'):
+                wechat_notify('kindle_note_web', '更新 is_deleted 失败')
             print('\n')
 
     print('down')

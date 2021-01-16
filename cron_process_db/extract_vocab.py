@@ -212,7 +212,11 @@ b. 导出文件 发送至 用户邮箱
 '''
 def main(input_file_path, output_file_path):
     # 调用 ECDICT
-    sd = stardict.StarDict('./dic/full_dic.db', False)
+    sd = ''
+    try:
+        sd = stardict.StarDict('dic/full_dic.db', False)
+    except Exception as e:
+        traceback.print_exc()
     # 查询词干 用 
     # lemma = stardict.LemmaDB()
     # lemma.load('lemma.en.txt')
